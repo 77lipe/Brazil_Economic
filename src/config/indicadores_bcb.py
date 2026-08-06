@@ -2,7 +2,7 @@
 
 INDICADORES_BCB = {
     "meta_selic": {
-        "codido": 432,
+        "codigo": 432,
         "nome": "Meta Selic",
         "desc": "Meta da taxa Selic definida pelo copom",
         "unidade": "% por ano",

@@ -1,0 +1,10 @@
+# Ambiente verificado com Python 3.14.6.
+
+# Pandas fornece as estruturas DataFrame e as operações de tratamento dos dados.
+pandas==3.0.5
+
+# Requests realiza as chamadas HTTP para a API do Banco Central do Brasil.
+requests==2.34.2
+
+# PyArrow permite ao Pandas ler e gravar os arquivos no formato Parquet.
+pyarrow==25.0.0

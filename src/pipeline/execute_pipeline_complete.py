@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from src.pipeline.executar_pipeline import execute_pipeline
-from src.transformation.consolidar_indicadores import dfInal_indicadores_bcb
+from src.transformation.consolidar_indicadores import consolidar_indicadores_bcb
 from src.storage.cmd_gold import salvar_gold
 
 def execute_pipeline_complete(data_inicial: str, data_final: str) -> Path:
@@ -12,7 +12,7 @@ def execute_pipeline_complete(data_inicial: str, data_final: str) -> Path:
         data_final=data_final
     )
 
-    df_gold = dfInal_indicadores_bcb(
+    df_gold = consolidar_indicadores_bcb(
         resultados=resultados
     )
     if df_gold.empty:

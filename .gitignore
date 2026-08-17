@@ -1,0 +1,36 @@
+# Ignora o ambiente virtual local, pois ele pode ser recriado pelas dependências.
+.venv/
+
+# Ignora pastas e arquivos compilados que o Python cria automaticamente.
+__pycache__/
+*.py[cod]
+
+# Ignora caches e relatórios criados pelas ferramentas de teste e cobertura.
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignora checkpoints automáticos criados pelo Jupyter Notebook.
+.ipynb_checkpoints/
+
+# Ignora configurações locais dos editores e arquivos do sistema operacional.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ignora variáveis de ambiente que podem conter senhas, tokens ou configurações locais.
+.env
+.env.*
+!.env.example
+
+# Ignora os dados gerados pelo pipeline; as pastas são recriadas automaticamente.
+data/bronze/
+data/silver/
+data/gold/
+
+# Ignora arquivos de log e artefatos gerados ao empacotar o projeto.
+*.log
+build/
+dist/
+*.egg-info/

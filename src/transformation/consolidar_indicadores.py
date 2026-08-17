@@ -2,29 +2,39 @@
 
 import pandas as  pd
 
-def dfInal_indicadores_bcb(resultados: dict) -> pd.DataFrame:
+def consolidar_indicadores_bcb(resultados: dict) -> pd.DataFrame:
 
+    if not isinstance(resultados, dict):
+        raise ValueError(
+            "O argumento esperado para 'resultados' precisar ser um dicionário!"
+        )
+    
     df_indicadores = []
-    for indicador, resultado in resultados.items():
+    for resultado in resultados.values():
         #print("resultado:", resultado)
-        if resultado["status"] != "sucesso":
+        if resultado.get("status") != "sucesso":
             continue
 
-        df_indicador = resultado["resultado"]
+        df_indicador = resultado.get("resultado")
+        if not isinstance(df_indicador, pd.DataFrame):
+            continue
+
         if df_indicador.empty:
             continue
 
+        
         df_indicadores.append(df_indicador)
-        if not df_indicadores:
+        
+    if not df_indicadores:
             return pd.DataFrame()
 
-        df_final = pd.concat(
-            df_indicadores,
-            ignore_index=True
-        )
-        df_final = df_final.sort_values(
-            by=["data", "indicador"]
-        )
-        df_final = df_final.reset_index(drop=True)
+    dataframe_final = pd.concat(
+        df_indicadores,
+        ignore_index=True
+    )
+    dataframe_final = dataframe_final.sort_values(
+        by=["data", "indicador"]
+    )
+    dataframe_final = dataframe_final.reset_index(drop=True)
 
-    return df_final
+    return dataframe_final

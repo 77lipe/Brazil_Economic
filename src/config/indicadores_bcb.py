@@ -4,7 +4,7 @@ INDICADORES_BCB = {
     "meta_selic": {
         "codigo": 432,
         "nome": "Meta Selic",
-        "desc": "Meta da taxa Selic definida pelo copom",
+        "descricao": "Meta da taxa Selic definida pelo copom",
         "unidade": "% por ano",
         "frequencia": "diaria",
     },
@@ -13,7 +13,7 @@ INDICADORES_BCB = {
         "nome": "Dólar comercial - venda",
         "descricao": "Taxa de câmbio do dólar americano para venda",
         "unidade": "R$ por US$",
-        "frequencia": "diaria,"
+        "frequencia": "diaria"
     },
 }
 

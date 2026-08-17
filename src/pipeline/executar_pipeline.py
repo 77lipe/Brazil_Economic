@@ -1,27 +1,33 @@
 """ Arquivo que executará o pipeline - parcial """
 
 from src.config.indicadores_bcb import INDICADORES_BCB
-from src.pipeline.processar_indicador_bcb import processor_indicador_bcb
+from src.pipeline.processar_indicador_bcb import processar_indicador_bcb
 
-def execute_pipeline(data_inicial: str, data_final: str):
+def execute_pipeline(data_inicial: str, data_final: str) -> dict:
 
     resultados = {}
     for indicador in INDICADORES_BCB:
         print(f'\nProcessando indicador: {indicador}')
         try:
-            resultado = processor_indicador_bcb(indicador, data_inicial=data_inicial, data_final=data_final)
-            resultados[indicador] = {
-                "status": "sucesso",
-                "resultado": resultado
-            }
-            print(f"Indicador concluído: {indicador}")
+
+            resultado = processar_indicador_bcb(indicador, data_inicial=data_inicial, data_final=data_final)
         except Exception as erro:
             resultados[indicador] = {
-                "status": "false",
+                "status": "erro",
+                "tipo_erro": type(erro).__name__,
                 "erro": str(erro)
             }
 
-            print(f"Erro ao processar {indicador}: {erro}")
+            print(
+                f"Erro ao processar {indicador}: {erro}"
+                f"\n{type(erro).__name__}")
+
+            continue
+        resultados[indicador] = {
+            "status": "sucesso",
+            "resultado": resultado
+        } 
+        print(f"Indicador concluído: {indicador}")
 
     return resultados
 

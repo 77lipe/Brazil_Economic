@@ -1,9 +1,14 @@
 """ Funções de extração de dados da API do BCB """
 
+from datetime import datetime
 import pandas as pd
 import requests
 
 from src.config.indicadores_bcb import INDICADORES_BCB
+from src.extraction.validar_datas import validar_periodo_bcb
+
+class ErroApiBcb(RuntimeError):
+    """Indica erro na API do bcb, no qual não poderá fornecer uma resposta válida conforme o caso"""
 
 BASE_URL_BCB = (
     "https://api.bcb.gov.br/dados/serie/"
@@ -19,6 +24,8 @@ def buscar_serie_bcb (nome_indicador: str, data_inicial: str, data_final: str) -
         )
     codigo = indicador["codigo"]
 
+    validar_periodo_bcb(data_inicial=data_inicial, data_final=data_final)
+
     url = BASE_URL_BCB.format(codigo=codigo)
 
     parametros = {
@@ -26,16 +33,49 @@ def buscar_serie_bcb (nome_indicador: str, data_inicial: str, data_final: str) -
         "dataInicial": data_inicial,
         "dataFinal": data_final
     }
-    
-    resposta = requests.get(
-        url,
-        params=parametros,
-        timeout=30
-    )
-    
+    try:
+        resposta = requests.get(
+            url,
+            params=parametros,
+            timeout=30
+        )
 
-    resposta.raise_for_status()
-    dados = resposta.json()
+        resposta.raise_for_status()
+
+    except requests.Timeout as erro:
+        raise ErroApiBcb(
+            f"A API do BCB excedeu  tempo limite ao consultar"
+            f"'{nome_indicador}'"
+        )
+    except requests.HTTPError as erro:
+        codigo_http = (
+            erro.response.status_code
+            if erro.response is not None
+            else "desconhecido"
+        )
+        raise ErroApiBcb(
+            f"A API do BCB retornou o erro HTTP {codigo_http} "
+            f"ao consultar '{nome_indicador}'."
+        ) from erro
+    except requests.RequestException as erro:
+        raise ErroApiBcb(
+            f"Não foi possível conectar à API do BCB para consultar "
+            f"'{nome_indicador}'."
+        ) from erro
+
+    try:
+        dados = resposta.json()
+    except requests.exceptions.JSONDecodeError as erro:
+        raise ErroApiBcb(
+            f"A API do BCB retornou um formato inesperado para "
+            f"'{nome_indicador}'."
+        ) from erro
+
+    if not isinstance(dados, list):
+        raise ErroApiBcb(
+            f"A API do BCB retornou um formato inesperado para "
+            f"'{nome_indicador}'."
+        )
     dataframe = pd.DataFrame(dados)
 
     return dataframe

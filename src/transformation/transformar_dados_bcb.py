@@ -12,6 +12,7 @@ def transformar_dados_bcb(dataframe: pd.DataFrame, nome_indicador: str)-> pd.Dat
         )
 
     df_transformado = dataframe.copy()
+
     df_transformado["data"] = pd.to_datetime(
         df_transformado["data"],
         format="%d/%m/%Y",
@@ -23,15 +24,11 @@ def transformar_dados_bcb(dataframe: pd.DataFrame, nome_indicador: str)-> pd.Dat
         errors="raise"
     )
 
-    lista = []
-    for i in indicador:
-        lista.append(i)
-    print(lista)
-
     df_transformado["indicador"] = nome_indicador
-    for i in lista:
-        if i != "desc":
-            df_transformado[i] = indicador[i]
+
+    for nome_coluna, valor_metadado in indicador.items():
+        df_transformado[nome_coluna] = valor_metadado
+            
     df_transformado["fonte"] = "Banco Central do Brasil"
 
     df_transformado["ano"] = (

@@ -3,7 +3,8 @@
 from pathlib import Path
 import pandas as pd
 
-CAMINHO_GOLD = Path("data/gold")
+from src.config.caminhos import CAMINHO_GOLD
+
 def salvar_gold(
         dataframe: pd.DataFrame,
         nome_tabela: str

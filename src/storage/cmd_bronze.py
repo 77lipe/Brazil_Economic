@@ -5,14 +5,15 @@ from pathlib import Path
 
 import pandas as pd 
 
-CMD_BRONZE = Path("data/bronze")
+from src.config.caminhos import CAMINHO_BRONZE
+
 
 def salvar_bronze(
     dataframe: pd.DataFrame,
     nome_indicador: str
 ) -> Path:
 
-    CMD_BRONZE.mkdir(
+    CAMINHO_BRONZE.mkdir(
         parents=True,
         exist_ok=True
     )
@@ -22,7 +23,7 @@ def salvar_bronze(
         f'{nome_indicador}_{data_executacao}.json'
     )
 
-    caminho_arquivo = CMD_BRONZE / nome_arquivo
+    caminho_arquivo = CAMINHO_BRONZE / nome_arquivo
 
     dataframe.to_json(
         caminho_arquivo, 

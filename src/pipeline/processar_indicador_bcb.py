@@ -31,7 +31,9 @@ def processar_indicador_bcb(
  
     salvar_silver(
         dataframe_tratado=df_tratado,
-        nome_indicar=nome_indicador
+        nome_indicar=nome_indicador,
+        data_inicial=data_inicial,
+        data_final=data_final
     )
 
     return df_tratado

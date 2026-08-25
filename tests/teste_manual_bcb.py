@@ -30,7 +30,9 @@ df_meta_selic_tratado = transformar_dados_bcb(
 
 caminho_silver = salvar_silver(
     dataframe_tratado=df_meta_selic_tratado,
-    nome_indicar="meta_selic"
+    nome_indicar="meta_selic",
+    data_inicial="01/01/2025",
+    data_final="31/12/2025"
 )
 
 

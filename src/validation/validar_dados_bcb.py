@@ -7,7 +7,7 @@ def validar_dados_bcb(dataframe: pd.DataFrame) -> None:
     
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError(
-            "O objeto recebino não é um DataFrame"
+            "O objeto recebido não é um DataFrame"
         )
     
     if dataframe.empty:

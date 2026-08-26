@@ -1,19 +1,18 @@
 """ Função de validar as datas correspondentes a API """
 
 from datetime import datetime
-import pandas as pd
-import requests
-
-from src.config.indicadores_bcb import INDICADORES_BCB
 
 FORMATO_DATA_BCB = "%d/%m/%Y"
-TEMPO_LIMITE_REQUISICAO = 30
 
 def validar_periodo_bcb(
         data_inicial: str,
         data_final: str
 ) -> None:
 
+    if not isinstance(data_inicial, str) or not isinstance(data_final, str):
+        raise TypeError(
+            "As datas dever estar no formato de string"
+        )
     try:
         data_inicial_convertida = datetime.strptime(
             data_inicial,

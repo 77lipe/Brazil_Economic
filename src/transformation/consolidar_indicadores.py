@@ -5,7 +5,7 @@ import pandas as  pd
 def consolidar_indicadores_bcb(resultados: dict) -> pd.DataFrame:
 
     if not isinstance(resultados, dict):
-        raise ValueError(
+        raise TypeError(
             "O argumento esperado para 'resultados' precisar ser um dicionário!"
         )
     

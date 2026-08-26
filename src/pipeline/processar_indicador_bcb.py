@@ -20,15 +20,18 @@ def processar_indicador_bcb(
         data_final=data_final
     )
 
-    salvar_bronze(dataframe=df_inicial, nome_indicador=nome_indicador)
+    salvar_bronze(
+        dataframe=df_inicial, 
+        nome_indicador=nome_indicador
+        )
 
-    
+    validar_dados_bcb(df_inicial)
 
     df_tratado = transformar_dados_bcb(
         dataframe=df_inicial,
         nome_indicador=nome_indicador
     )
- 
+
     salvar_silver(
         dataframe_tratado=df_tratado,
         nome_indicar=nome_indicador,

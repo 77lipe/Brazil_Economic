@@ -8,7 +8,7 @@ def transformar_dados_bcb(dataframe: pd.DataFrame, nome_indicador: str)-> pd.Dat
     indicador = INDICADORES_BCB.get(nome_indicador)
     if indicador is None:
         raise ValueError(
-            f"Indicador '{nome_indicador} não encontrado'"
+            f"Indicador '{nome_indicador}' não encontrado"
         )
 
     df_transformado = dataframe.copy()

@@ -1,6 +1,6 @@
 """ Funções de extração de dados da API do BCB """
 
-from datetime import datetime
+
 import pandas as pd
 import requests
 
@@ -10,6 +10,7 @@ from src.extraction.validar_datas import validar_periodo_bcb
 class ErroApiBcb(RuntimeError):
     """Indica erro na API do bcb, no qual não poderá fornecer uma resposta válida conforme o caso"""
 
+TEMPO_LIMITE_REQUISICAO = 30
 BASE_URL_BCB = (
     "https://api.bcb.gov.br/dados/serie/"
     "bcdata.sgs.{codigo}/dados"
@@ -37,7 +38,7 @@ def buscar_serie_bcb (nome_indicador: str, data_inicial: str, data_final: str) -
         resposta = requests.get(
             url,
             params=parametros,
-            timeout=30
+            timeout=TEMPO_LIMITE_REQUISICAO
         )
 
         resposta.raise_for_status()
@@ -46,7 +47,7 @@ def buscar_serie_bcb (nome_indicador: str, data_inicial: str, data_final: str) -
         raise ErroApiBcb(
             f"A API do BCB excedeu  tempo limite ao consultar"
             f"'{nome_indicador}'"
-        )
+        ) from erro
     except requests.HTTPError as erro:
         codigo_http = (
             erro.response.status_code

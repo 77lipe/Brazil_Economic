@@ -11,7 +11,7 @@ from src.config.converter_data import formatar_data
 
 def salvar_silver(
         dataframe_tratado: pd.DataFrame,
-        nome_indicar: str,
+        nome_indicador: str,
         data_inicial: str,
         data_final: str
 ) -> Path:
@@ -29,7 +29,7 @@ def salvar_silver(
     data_inicial_formatada = formatar_data(data_inicial)
     data_final_formatada = formatar_data(data_final)
     nome_arquivo = (
-        f"{nome_indicar}_"
+        f"{nome_indicador}_"
         f"{data_inicial_formatada}_"
         f"{data_final_formatada}.parquet"
         )

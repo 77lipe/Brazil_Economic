@@ -2,10 +2,17 @@
 
 from src.config.indicadores_bcb import INDICADORES_BCB
 from src.pipeline.processar_indicador_bcb import processar_indicador_bcb
+from src.extraction.validar_datas import *
 
 def execute_pipeline(data_inicial: str, data_final: str) -> dict:
 
+    validar_periodo_bcb(
+        data_inicial=data_inicial,
+        data_final=data_final
+    )
+
     resultados = {}
+
     for indicador in INDICADORES_BCB:
         print(f'\nProcessando indicador: {indicador}')
         try:

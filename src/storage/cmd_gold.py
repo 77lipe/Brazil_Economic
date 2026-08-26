@@ -14,16 +14,17 @@ def salvar_gold(
         raise ValueError(
             "Não é posssível salvar um DataFrame VAZIO na camada gold"
         )
-    else:
-        CAMINHO_GOLD.mkdir(
-            parents=True,
-            exist_ok=True
-        )
+    
+    CAMINHO_GOLD.mkdir(
+        parents=True,
+        exist_ok=True
+    )
 
-        caminho_arquivo = CAMINHO_GOLD / f"{nome_tabela}.parquet"
-        dataframe.to_parquet(
-            caminho_arquivo,
-            index=False
-        )
+    caminho_arquivo = CAMINHO_GOLD / f"{nome_tabela}.parquet"
+
+    dataframe.to_parquet(
+        caminho_arquivo,
+        index=False
+    )
 
     return caminho_arquivo

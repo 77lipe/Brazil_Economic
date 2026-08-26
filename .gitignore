@@ -34,5 +34,3 @@ data/gold/
 build/
 dist/
 *.egg-info/
-
-.gitignore

@@ -8,3 +8,6 @@ requests==2.34.2
 
 # PyArrow permite ao Pandas ler e gravar os arquivos no formato Parquet.
 pyarrow==25.0.0
+
+# Streamlit para interface web do dashboard.
+streamlit==1.62.0

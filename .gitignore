@@ -34,3 +34,5 @@ data/gold/
 build/
 dist/
 *.egg-info/
+
+app_inicial.py

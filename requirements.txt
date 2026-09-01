@@ -11,3 +11,6 @@ pyarrow==25.0.0
 
 # Streamlit para interface web do dashboard.
 streamlit==1.62.0
+
+# Altair para construção dos gráfico junto do pandas
+altaiir==6.2.2
